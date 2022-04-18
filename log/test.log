@@ -1,0 +1,1473 @@
+  [1m[35m (17.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS `taskleaf_test`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE `taskleaf_test` DEFAULT CHARACTER SET `utf8`[0m
+  [1m[35m (4.6ms)[0m  [1m[35mDROP TABLE IF EXISTS `tasks` CASCADE[0m
+  [1m[35m (42.4ms)[0m  [1m[35mCREATE TABLE `tasks` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(30) NOT NULL, `description` text, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, `user_id` bigint NOT NULL,  INDEX `index_tasks_on_user_id`  (`user_id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `users` CASCADE[0m
+  [1m[35m (28.7ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `email` varchar(255) NOT NULL, `password_digest` varchar(255) NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, `admin` tinyint(1) DEFAULT FALSE NOT NULL, UNIQUE INDEX `index_users_on_email`  (`email`)) ENGINE=InnoDB DEFAULT CHARSET=utf8[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT @@innodb_file_per_table = 1 AND @@innodb_file_format = 'Barracuda'[0m
+  [1m[35m (30.4ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (5.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (20220313013234)[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES
+(20220307040100),
+(20220310053739),
+(20220310085051),
+(20220311024238),
+(20220311052702);
+
+[0m
+  [1m[35m (27.6ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'test', '2022-03-18 03:14:13.172075', '2022-03-18 03:14:13.172075')[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', 'de38b38f94f921c0635281fbc60cf4fe3e371df6', '2022-03-18 03:14:13.177103', '2022-03-18 03:14:13.177103')[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$8BLp9EffOYPBU57dzV4a2eQhbj3viPDMIqosi8WSYxnZ88LvuGDPu', '2022-03-18 03:15:08.420500', '2022-03-18 03:15:08.420500')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-18 03:15:08.443684', '2022-03-18 03:15:08.443684', 1)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-18 12:15:43 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 15.3ms | Allocations: 11755)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /Users/yamadaanji/projects/taskleaf/public/packs-test
+[Webpacker] Hash: 3889897ff4178151ccc8
+Version: webpack 4.46.0
+Time: 1025ms
+Built at: 2022/03/18 12:15:51
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-65eb92209dd10380e0e8.js    124 KiB  application  [emitted] [immutable]  application
+js/application-65eb92209dd10380e0e8.js.map    139 KiB  application  [emitted] [dev]        application
+                             manifest.json  384 bytes               [emitted]              
+Entrypoint application = js/application-65eb92209dd10380e0e8.js js/application-65eb92209dd10380e0e8.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 749 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 3 hidden modules
+
+Completed 200 OK in 7532ms (Views: 7526.0ms | ActiveRecord: 0.0ms | Allocations: 1830243)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-18 12:15:51 +0900
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$0WY94nF544H6f3iNokzKGO0EFwrEyFhUQVmOmVL4pX25LscC3xn.K', '2022-03-18 03:19:53.268217', '2022-03-18 03:19:53.268217')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-18 03:19:53.279670', '2022-03-18 03:19:53.279670', 2)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-18 12:19:54 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 37.5ms | Allocations: 11749)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1438ms (Views: 1433.5ms | ActiveRecord: 0.0ms | Allocations: 1806407)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-18 12:19:55 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-18 12:19:56 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:53784/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-18 12:19:56 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 2 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 9.9ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 24ms (Views: 16.4ms | ActiveRecord: 0.7ms | Allocations: 16559)
+Started GET "/" for 127.0.0.1 at 2022-03-18 12:20:27 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 2 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 3.2ms | Allocations: 443)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 14ms (Views: 11.2ms | ActiveRecord: 1.1ms | Allocations: 7520)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$NegoPIn3TB.uJXfU8TpzMu/FkKfwrcqwVk5fILyA/BRxY1uSYS9Oi', '2022-03-18 03:22:53.614001', '2022-03-18 03:22:53.614001')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-18 03:22:53.629014', '2022-03-18 03:22:53.629014', 3)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-18 12:22:54 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 8.8ms | Allocations: 11750)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1192ms (Views: 1187.9ms | ActiveRecord: 0.0ms | Allocations: 1806427)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-18 12:22:55 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-18 12:22:56 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:53801/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-18 12:22:56 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 3 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 5.4ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 15ms (Views: 11.3ms | ActiveRecord: 0.6ms | Allocations: 16571)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$iteLbpEeSUSAy3aMKrshbeigumRDCUFEtPeunt2Ys/R5WkwigUQGC', '2022-03-18 03:42:51.873865', '2022-03-18 03:42:51.873865')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-18 03:42:51.887993', '2022-03-18 03:42:51.887993', 4)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-18 12:42:52 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 39.9ms | Allocations: 11750)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1287ms (Views: 1282.5ms | ActiveRecord: 0.0ms | Allocations: 1806436)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-18 12:42:54 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-18 12:42:54 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:53843/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-18 12:42:54 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 4 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 5.5ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 11.8ms | ActiveRecord: 0.6ms | Allocations: 16567)
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$yViZHkiyNRksMjQVdvqSy.l0u/AAGqEWt5lVaD80v12YVzoRVE/X6', '2022-03-18 03:42:54.792665', '2022-03-18 03:42:54.792665')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-18 03:42:54.794168', '2022-03-18 03:42:54.794168', 5)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'b@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーB', 'b@example.com', '$2a$04$6H4cZ8kYEuRDxAyYIWnRH.NKtbs9OW2/HJuSKvd1vrjYZyn8nGiQ6', '2022-03-18 03:42:54.797166', '2022-03-18 03:42:54.797166')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-18 12:42:54 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.5ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 7ms (Views: 6.9ms | ActiveRecord: 0.0ms | Allocations: 6936)
+Started POST "/login" for 127.0.0.1 at 2022-03-18 12:42:54 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"b@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'b@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:53843/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 479)
+Started GET "/" for 127.0.0.1 at 2022-03-18 12:42:54 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 6 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 6 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 0.9ms | Allocations: 299)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 6.8ms | ActiveRecord: 0.5ms | Allocations: 7409)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$2L2.PsUBI1TTrjVX0LwDcuf3oRYyVoM08OGKfwETNA0Kl3C7s8pde', '2022-03-18 03:44:34.097805', '2022-03-18 03:44:34.097805')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-18 03:44:34.137338', '2022-03-18 03:44:34.137338', 7)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-18 12:44:36 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 10.1ms | Allocations: 11750)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1317ms (Views: 1312.7ms | ActiveRecord: 0.0ms | Allocations: 1806444)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-18 12:44:37 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-18 12:44:37 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:53866/
+Completed 302 Found in 4ms (ActiveRecord: 0.6ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-18 12:44:37 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 7 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 6.2ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 19ms (Views: 13.0ms | ActiveRecord: 0.6ms | Allocations: 16567)
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$24nsWS0zgpVSxMJWqRJ.juUrA/8qAoOacsQrzDIl7AIMbS0vT0Gla', '2022-03-18 03:44:38.231926', '2022-03-18 03:44:38.231926')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-18 03:44:38.235084', '2022-03-18 03:44:38.235084', 8)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'b@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーB', 'b@example.com', '$2a$04$a3VRilLWGd8qwAPN2W6ul.GKJ/UQeDm.MdqD1/kBrXYEzWO5MkWvu', '2022-03-18 03:44:38.242276', '2022-03-18 03:44:38.242276')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-18 12:44:38 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.6ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 26ms (Views: 25.0ms | ActiveRecord: 0.0ms | Allocations: 6936)
+Started POST "/login" for 127.0.0.1 at 2022-03-18 12:44:38 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"b@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'b@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:53866/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 468)
+Started GET "/" for 127.0.0.1 at 2022-03-18 12:44:38 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 9 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.0ms | Allocations: 298)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 14ms (Views: 11.8ms | ActiveRecord: 0.6ms | Allocations: 7397)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$ETsWMMIlvkFPTd.Tx7wib.q3DameiFSZKZmKINlZblYg.M9UR3/Ke', '2022-03-18 03:45:03.846439', '2022-03-18 03:45:03.846439')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-18 03:45:03.860397', '2022-03-18 03:45:03.860397', 10)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-18 12:45:04 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 8.0ms | Allocations: 11750)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1136ms (Views: 1131.8ms | ActiveRecord: 0.0ms | Allocations: 1806456)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-18 12:45:05 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-18 12:45:06 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:53875/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-18 12:45:06 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 10 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 10 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 5.6ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 15ms (Views: 11.4ms | ActiveRecord: 0.6ms | Allocations: 16581)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$bUdOFriKJ2aE2tN6GiSpwO6SLf31Vzuz2ywFt2RCAwSLyXNZiDLRi', '2022-03-18 03:45:06.612871', '2022-03-18 03:45:06.612871')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-18 03:45:06.614473', '2022-03-18 03:45:06.614473', 11)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'b@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーB', 'b@example.com', '$2a$04$4Q08dI81/AiqMFinRQoY2e3Xkl9r3eOV.EUm3SdUngHA3ThdpgpJ.', '2022-03-18 03:45:06.617824', '2022-03-18 03:45:06.617824')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-18 12:45:06 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.5ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.1ms | ActiveRecord: 0.0ms | Allocations: 6936)
+Started POST "/login" for 127.0.0.1 at 2022-03-18 12:45:06 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"b@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'b@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:53875/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 479)
+Started GET "/" for 127.0.0.1 at 2022-03-18 12:45:06 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 12 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 12 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 0.8ms | Allocations: 299)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 6.9ms | ActiveRecord: 0.5ms | Allocations: 7417)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$CCIPYDxbIsUmeqxqTAa2X.B9dlo2dDyPzxA7lXC8Cd99Z18uucPJO', '2022-03-18 06:07:54.637556', '2022-03-18 06:07:54.637556')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-18 06:07:54.648374', '2022-03-18 06:07:54.648374', 13)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-18 15:07:55 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 9.8ms | Allocations: 11750)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1225ms (Views: 1219.9ms | ActiveRecord: 0.0ms | Allocations: 1806467)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-18 15:07:56 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-18 15:07:57 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:54053/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-18 15:07:57 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 13 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 13 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 5.3ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 11.3ms | ActiveRecord: 0.6ms | Allocations: 16569)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$voAn9rcG3zPw9JgF8iN3S.tWsEyvm9SBYRSZuzg9hIXRPFeq29ASm', '2022-03-18 06:07:57.520135', '2022-03-18 06:07:57.520135')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-18 06:07:57.522011', '2022-03-18 06:07:57.522011', 14)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-18 15:07:57 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.5ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.8ms | ActiveRecord: 0.0ms | Allocations: 6936)
+Started POST "/login" for 127.0.0.1 at 2022-03-18 15:07:57 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:54053/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 479)
+Started GET "/" for 127.0.0.1 at 2022-03-18 15:07:57 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 14 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 14 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.2ms | Allocations: 444)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 6.9ms | ActiveRecord: 0.5ms | Allocations: 7546)
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'b@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーB', 'b@example.com', '$2a$04$i62uo4o2sXocvpAix1pS4eMR0VzjVX19wOqCzVeDUTe0cbzNM3FaS', '2022-03-18 06:07:57.698093', '2022-03-18 06:07:57.698093')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$Yauk/bPiz7p7v3c/KpFxKOK7mq95aXemOGYVJmle7QjhPs6nJCybC', '2022-03-18 06:13:24.722981', '2022-03-18 06:13:24.722981')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$WSdQlxG4dxy5f5AP.6m.ROi5vGmHxLLISkQFrjFtUVvawYkw9ZB1e', '2022-03-18 06:13:25.757002', '2022-03-18 06:13:25.757002')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$VlKUbpHUqPQMRAEp2rkEXu5ZBMg8bQJcSCaH04A9qXVjd5VI4ygme', '2022-03-18 06:16:07.459514', '2022-03-18 06:16:07.459514')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$Buc/lHvvMImoeh/6GeKioeKVltC.2W8JOYqz9a1rTVps2yDx.tcpq', '2022-03-18 06:16:08.483003', '2022-03-18 06:16:08.483003')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (9.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (3.0ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (6.8ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$BfRmiLx.DE/5SmljWFvwFexw.zt8yGlrWKnnYsy8r.QVO3clwuJ4C', '2022-03-19 04:24:01.437346', '2022-03-19 04:24:01.437346')[0m
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-19 04:24:01.472903', '2022-03-19 04:24:01.472903', 20)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-19 13:24:02 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 43.4ms | Allocations: 11749)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1403ms (Views: 1396.6ms | ActiveRecord: 0.0ms | Allocations: 1806481)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-19 13:24:04 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-19 13:24:04 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:54281/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-19 13:24:04 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 20 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 20 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 10.1ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 26ms (Views: 18.0ms | ActiveRecord: 0.7ms | Allocations: 16579)
+  [1m[35m (2.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$9I5RaLfLN8e6ek1aevuRFOym/yTYBgU/IsSY.fFHrjmpf2VdFp9Ty', '2022-03-19 04:24:05.078678', '2022-03-19 04:24:05.078678')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-19 04:24:05.080398', '2022-03-19 04:24:05.080398', 21)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-19 13:24:05 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.7ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 8.5ms | ActiveRecord: 0.0ms | Allocations: 6936)
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'b@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーB', 'b@example.com', '$2a$04$ZRih5yEzXijucl5JsvkY5uO..moyB6j1g100WNFvCHQeucvA3c80S', '2022-03-19 04:24:05.118336', '2022-03-19 04:24:05.118336')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/login" for 127.0.0.1 at 2022-03-19 13:24:05 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"b@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'b@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:54281/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 479)
+Started GET "/" for 127.0.0.1 at 2022-03-19 13:24:05 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 22 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 22 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.0ms | Allocations: 299)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 6.6ms | ActiveRecord: 0.6ms | Allocations: 7409)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$t38rNqJ5uOZVr/N6u5jxquuA1r8crlx4SwMFtvL2n0pTJjH4DOPAy', '2022-03-19 04:44:22.993699', '2022-03-19 04:44:22.993699')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-19 04:44:23.010073', '2022-03-19 04:44:23.010073', 23)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-19 04:44:23.012406', '2022-03-19 04:44:23.012406', 23)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-19 13:44:23 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 39.1ms | Allocations: 11752)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1324ms (Views: 1319.1ms | ActiveRecord: 0.0ms | Allocations: 1806490)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-19 13:44:25 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-19 13:44:25 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:54321/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-19 13:44:25 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 23 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 23 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 5.8ms | Allocations: 7690)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 11.9ms | ActiveRecord: 0.6ms | Allocations: 16718)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$/wewzGOg9BkqAp.EYzZr7ui4/H2rMH5ppGD1yczInfKm.q5GT/Yku', '2022-03-19 04:44:26.010766', '2022-03-19 04:44:26.010766')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-19 04:44:26.012516', '2022-03-19 04:44:26.012516', 24)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-19 04:44:26.013964', '2022-03-19 04:44:26.013964', 24)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-19 13:44:26 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.5ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.0ms | Allocations: 6936)
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'b@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーB', 'b@example.com', '$2a$04$EWee9yyOYOvHDFIPVAct/eqHUpM0RvEjaIDwvwNwcneue1r6GOszy', '2022-03-19 04:44:26.045040', '2022-03-19 04:44:26.045040')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/login" for 127.0.0.1 at 2022-03-19 13:44:26 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"b@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'b@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:54321/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 479)
+Started GET "/" for 127.0.0.1 at 2022-03-19 13:44:26 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 25 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 25 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.0ms | Allocations: 299)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 7.0ms | ActiveRecord: 0.5ms | Allocations: 7413)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$WENW0SH6uKFivvwO.zQ9W.G43ZP4XBvXM6ftFUhuQbGJ5ZcRU7LBG', '2022-03-19 04:48:16.825834', '2022-03-19 04:48:16.825834')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-19 04:48:16.843145', '2022-03-19 04:48:16.843145', 26)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-19 13:48:17 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 8.0ms | Allocations: 11752)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1224ms (Views: 1219.8ms | ActiveRecord: 0.0ms | Allocations: 1806504)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-19 13:48:19 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-19 13:48:19 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:54338/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-19 13:48:19 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 26 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 26 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 5.5ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 12.0ms | ActiveRecord: 0.6ms | Allocations: 16563)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$orVjDam/osCxAo2IlDG.7OAzhsTXC60OZnbCRunklU1GydCCHVWUS', '2022-03-19 04:48:19.712180', '2022-03-19 04:48:19.712180')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-19 04:48:19.713803', '2022-03-19 04:48:19.713803', 27)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-19 13:48:19 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.6ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 8.5ms | ActiveRecord: 0.0ms | Allocations: 6936)
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'b@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーB', 'b@example.com', '$2a$04$lQALcBSbbhO4B5zzN.CXM.ZunmB6BCYA1GZDQ0swJYX./KWOiOrvK', '2022-03-19 04:48:19.747077', '2022-03-19 04:48:19.747077')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/login" for 127.0.0.1 at 2022-03-19 13:48:19 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"b@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'b@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:54338/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 479)
+Started GET "/" for 127.0.0.1 at 2022-03-19 13:48:19 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 28 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 28 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.0ms | Allocations: 299)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 6.8ms | ActiveRecord: 0.5ms | Allocations: 7407)
+  [1m[35m (1.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$9hWy3vXG22GNDPHz96y7Yugv148EmKJNezM.NI4iD9x2M5wxYWHH.', '2022-03-19 04:56:16.901203', '2022-03-19 04:56:16.901203')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-19 04:56:16.921125', '2022-03-19 04:56:16.921125', 29)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-19 13:56:17 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 8.2ms | Allocations: 11752)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1192ms (Views: 1187.6ms | ActiveRecord: 0.0ms | Allocations: 1806509)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-19 13:56:19 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-19 13:56:19 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:54435/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-19 13:56:19 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 29 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 29 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 5.2ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 15ms (Views: 11.1ms | ActiveRecord: 0.6ms | Allocations: 16585)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$ot8oTmBECHTLQHS4yX/W3ONlEfAYD/aozJE2CZME1nC4KXxe2YPw2', '2022-03-19 04:56:19.773150', '2022-03-19 04:56:19.773150')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-19 04:56:19.775014', '2022-03-19 04:56:19.775014', 30)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-19 13:56:19 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.8ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 10ms (Views: 9.5ms | ActiveRecord: 0.0ms | Allocations: 6936)
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'b@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーB', 'b@example.com', '$2a$04$iXKAMI9XEGARn/LgIWMaqeFrHggaRNWyjUoD7pSSKbGTQCHigZ1qy', '2022-03-19 04:56:19.814552', '2022-03-19 04:56:19.814552')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/login" for 127.0.0.1 at 2022-03-19 13:56:19 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"b@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'b@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:54435/
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms | Allocations: 479)
+Started GET "/" for 127.0.0.1 at 2022-03-19 13:56:19 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 31 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 31 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 0.9ms | Allocations: 299)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 6.8ms | ActiveRecord: 0.5ms | Allocations: 7403)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$iXpLtNyU8HG6vOQARWQTCeEbOMOWgsnBAm0rINeQo8MaglH0U4PDq', '2022-03-19 04:56:20.122385', '2022-03-19 04:56:20.122385')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-19 04:56:20.124051', '2022-03-19 04:56:20.124051', 32)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-19 13:56:20 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.7ms | Allocations: 334)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.0ms | Allocations: 6923)
+Started POST "/login" for 127.0.0.1 at 2022-03-19 13:56:20 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:54435/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 468)
+Started GET "/" for 127.0.0.1 at 2022-03-19 13:56:20 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 32 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 32 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.3ms | Allocations: 443)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 7.2ms | ActiveRecord: 0.5ms | Allocations: 7545)
+Started GET "/tasks/22" for 127.0.0.1 at 2022-03-19 13:56:20 +0900
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"22"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 32 LIMIT 1[0m
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 32 AND `tasks`.`id` = 22 LIMIT 1[0m
+  Rendering tasks/show.html.slim within layouts/application
+  Rendered tasks/show.html.slim within layouts/application (Duration: 48.5ms | Allocations: 7183)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 58ms (Views: 55.5ms | ActiveRecord: 0.4ms | Allocations: 14542)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (5.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (2.3ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$40DIacF/PU99icJ99zBAiOnFljVk9WXQHzBRQqqV0T2jp0DOgMVsO', '2022-03-21 03:25:48.372550', '2022-03-21 03:25:48.372550')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-21 03:25:48.398868', '2022-03-21 03:25:48.398868', 33)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-21 12:25:49 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 42.7ms | Allocations: 11752)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1397ms (Views: 1390.2ms | ActiveRecord: 0.0ms | Allocations: 1806520)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-21 12:25:50 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-21 12:25:51 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56228/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:25:51 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 33 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 33 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 9.1ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 26ms (Views: 16.3ms | ActiveRecord: 0.7ms | Allocations: 16593)
+  [1m[35m (1.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$PHcgarLQv6UCi.I4Nfz1oueTkHwXXM//.2k3a4v3LroLIx3jpu3su', '2022-03-21 03:25:51.675153', '2022-03-21 03:25:51.675153')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-21 03:25:51.676830', '2022-03-21 03:25:51.676830', 34)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-21 12:25:51 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.6ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.3ms | ActiveRecord: 0.0ms | Allocations: 6936)
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'b@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーB', 'b@example.com', '$2a$04$AvldFLC2yiJpEgWad2tRmOvVdn4aAfT3RRkiVufcmIKjwupl2netu', '2022-03-21 03:25:51.710017', '2022-03-21 03:25:51.710017')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/login" for 127.0.0.1 at 2022-03-21 12:25:51 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"b@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'b@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56228/
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms | Allocations: 479)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:25:51 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 35 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 35 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 0.8ms | Allocations: 299)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 6.4ms | ActiveRecord: 0.5ms | Allocations: 7405)
+  [1m[35m (1.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$EUU.mhESYKSsugmU.tRDJeDzx7PMfwIM.fTSV3mbp8fvBBEjYf8E.', '2022-03-21 03:25:51.988404', '2022-03-21 03:25:51.988404')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-21 03:25:51.989997', '2022-03-21 03:25:51.989997', 36)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-21 12:25:51 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.5ms | Allocations: 334)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 42ms (Views: 41.1ms | ActiveRecord: 0.0ms | Allocations: 6925)
+Started POST "/login" for 127.0.0.1 at 2022-03-21 12:25:52 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56228/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 468)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:25:52 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 36 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 36 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.2ms | Allocations: 447)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 6.7ms | ActiveRecord: 0.5ms | Allocations: 7556)
+Started GET "/tasks/25" for 127.0.0.1 at 2022-03-21 12:25:52 +0900
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"25"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 36 LIMIT 1[0m
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 36 AND `tasks`.`id` = 25 LIMIT 1[0m
+  Rendering tasks/show.html.slim within layouts/application
+  Rendered tasks/show.html.slim within layouts/application (Duration: 13.7ms | Allocations: 7196)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 25ms (Views: 22.6ms | ActiveRecord: 0.6ms | Allocations: 14565)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$IVMGeP1LUZilicZx.yiC6.fUOV26Uaqs14G6VFLBmBCo7fMo1lSG6', '2022-03-21 03:40:22.088009', '2022-03-21 03:40:22.088009')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-21 03:40:22.102836', '2022-03-21 03:40:22.102836', 37)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-21 12:40:23 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 10.9ms | Allocations: 11751)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1240ms (Views: 1234.1ms | ActiveRecord: 0.0ms | Allocations: 1806528)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-21 12:40:24 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-21 12:40:24 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56265/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:40:24 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 37 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 37 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 5.2ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 15ms (Views: 11.5ms | ActiveRecord: 0.6ms | Allocations: 16581)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$W9dZxiccbmdspulwRkCG7usVgDcRBdM/7.HIPPhKlLdsb2pFi36aa', '2022-03-21 03:40:25.020865', '2022-03-21 03:40:25.020865')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-21 03:40:25.022676', '2022-03-21 03:40:25.022676', 38)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-21 12:40:25 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.5ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.0ms | Allocations: 6936)
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'b@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーB', 'b@example.com', '$2a$04$UIe5ftQUwm1H5gYv9tY6hea0BGmqNr7VQvZYXAyn/mvjrwn5.5BNa', '2022-03-21 03:40:25.056601', '2022-03-21 03:40:25.056601')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/login" for 127.0.0.1 at 2022-03-21 12:40:25 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"b@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'b@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56265/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 479)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:40:25 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 39 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 39 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.0ms | Allocations: 299)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 6.7ms | ActiveRecord: 0.5ms | Allocations: 7399)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$vYbujDPBywD4KBM6BMIutud4WSFCQqAJ80lRVjV5W9TvHpyBLm4mG', '2022-03-21 03:40:25.356297', '2022-03-21 03:40:25.356297')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-21 03:40:25.358076', '2022-03-21 03:40:25.358076', 40)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-21 12:40:25 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.7ms | Allocations: 334)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.0ms | Allocations: 6923)
+Started POST "/login" for 127.0.0.1 at 2022-03-21 12:40:25 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56265/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 468)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:40:25 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 40 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 40 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.3ms | Allocations: 443)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 6.7ms | ActiveRecord: 0.5ms | Allocations: 7545)
+Started GET "/tasks/28" for 127.0.0.1 at 2022-03-21 12:40:25 +0900
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"28"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 40 LIMIT 1[0m
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 40 AND `tasks`.`id` = 28 LIMIT 1[0m
+  Rendering tasks/show.html.slim within layouts/application
+  Rendered tasks/show.html.slim within layouts/application (Duration: 8.7ms | Allocations: 7183)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 19ms (Views: 16.1ms | ActiveRecord: 0.9ms | Allocations: 14548)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$sPSfk/tnj5H2b50SRsM9UO9MjpiDGAJ5gh1C/MwwOrnR7PHlgRDmG', '2022-03-21 03:40:25.728274', '2022-03-21 03:40:25.728274')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-21 03:40:25.731747', '2022-03-21 03:40:25.731747', 41)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-21 12:40:25 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.6ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.8ms | ActiveRecord: 0.0ms | Allocations: 6936)
+Started POST "/login" for 127.0.0.1 at 2022-03-21 12:40:25 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56265/
+Completed 302 Found in 4ms (ActiveRecord: 0.4ms | Allocations: 468)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:40:25 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 41 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 41 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.4ms | Allocations: 445)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 11ms (Views: 8.9ms | ActiveRecord: 0.7ms | Allocations: 7552)
+Started GET "/tasks/new" for 127.0.0.1 at 2022-03-21 12:40:25 +0900
+Processing by TasksController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 41 LIMIT 1[0m
+  Rendering tasks/new.html.slim within layouts/application
+  Rendered tasks/_form.html.slim (Duration: 10.8ms | Allocations: 4348)
+  Rendered tasks/new.html.slim within layouts/application (Duration: 15.2ms | Allocations: 6731)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 25ms (Views: 23.1ms | ActiveRecord: 0.3ms | Allocations: 13761)
+Started POST "/tasks" for 127.0.0.1 at 2022-03-21 12:40:26 +0900
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"新規作成のテストを書く", "description"=>""}, "commit"=>"登録する"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 41 LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('新規作成のテストを書く', '', '2022-03-21 03:40:26.075954', '2022-03-21 03:40:26.075954', 41)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://127.0.0.1:56265/
+Completed 302 Found in 3ms (ActiveRecord: 0.8ms | Allocations: 1103)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:40:26 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 41 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 41 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.4ms | Allocations: 593)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 55ms (Views: 53.1ms | ActiveRecord: 0.6ms | Allocations: 7704)
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$HrCPhJWyywbf6NWMOUjLLuhkdOj.iMCdpHB8qrsN4oBoWVzSVxzwu', '2022-03-21 03:57:14.998630', '2022-03-21 03:57:14.998630')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-21 03:57:15.009492', '2022-03-21 03:57:15.009492', 42)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-21 12:57:15 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 33.9ms | Allocations: 11751)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1733ms (Views: 1729.0ms | ActiveRecord: 0.0ms | Allocations: 1806539)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-21 12:57:17 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-21 12:57:18 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56463/
+Completed 302 Found in 4ms (ActiveRecord: 0.4ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:57:18 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 42 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 42 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 6.6ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 17ms (Views: 12.5ms | ActiveRecord: 0.6ms | Allocations: 16573)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$lSCEf4XgKdEDasp8S2loK.vETnWIJuQBtCI8mGmoIom3nNLmQTxwm', '2022-03-21 03:57:18.420270', '2022-03-21 03:57:18.420270')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-21 03:57:18.422144', '2022-03-21 03:57:18.422144', 43)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-21 12:57:18 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.7ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 8.1ms | ActiveRecord: 0.0ms | Allocations: 6936)
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'b@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーB', 'b@example.com', '$2a$04$iRDtuvIbTu9EqHLqwYF8Suzw8Ljnhj92Y3Yj.yni4x7RQWESpt0xC', '2022-03-21 03:57:18.454228', '2022-03-21 03:57:18.454228')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/login" for 127.0.0.1 at 2022-03-21 12:57:18 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"b@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'b@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56463/
+Completed 302 Found in 5ms (ActiveRecord: 0.5ms | Allocations: 479)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:57:18 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 44 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 44 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.2ms | Allocations: 299)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 11ms (Views: 9.0ms | ActiveRecord: 0.6ms | Allocations: 7409)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$9AdOwvtvAvuFuZVcbZrJDelKaqMpK1/SWnsVIkoP.MSnIgHWlb5vS', '2022-03-21 03:57:18.802224', '2022-03-21 03:57:18.802224')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-21 03:57:18.804126', '2022-03-21 03:57:18.804126', 45)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-21 12:57:18 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.6ms | Allocations: 334)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 8.2ms | ActiveRecord: 0.0ms | Allocations: 6924)
+Started POST "/login" for 127.0.0.1 at 2022-03-21 12:57:18 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56463/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 468)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:57:18 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 45 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 45 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.2ms | Allocations: 447)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 7.0ms | ActiveRecord: 0.5ms | Allocations: 7551)
+Started GET "/tasks/33" for 127.0.0.1 at 2022-03-21 12:57:18 +0900
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"33"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 45 LIMIT 1[0m
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 45 AND `tasks`.`id` = 33 LIMIT 1[0m
+  Rendering tasks/show.html.slim within layouts/application
+  Rendered tasks/show.html.slim within layouts/application (Duration: 6.7ms | Allocations: 7196)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 15ms (Views: 12.6ms | ActiveRecord: 0.4ms | Allocations: 14563)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$hAymoclS/Z9eNEkx1eDfYeODH.0oJ4jKX7q.BWEjZe6n2Q9EYLd4m', '2022-03-21 03:57:19.159116', '2022-03-21 03:57:19.159116')[0m
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-21 03:57:19.162777', '2022-03-21 03:57:19.162777', 46)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-21 12:57:19 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.7ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 8.4ms | ActiveRecord: 0.0ms | Allocations: 6936)
+Started POST "/login" for 127.0.0.1 at 2022-03-21 12:57:19 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56463/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 468)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:57:19 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 46 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 46 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.2ms | Allocations: 445)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 7.0ms | ActiveRecord: 0.5ms | Allocations: 7548)
+Started GET "/tasks/new" for 127.0.0.1 at 2022-03-21 12:57:19 +0900
+Processing by TasksController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 46 LIMIT 1[0m
+  Rendering tasks/new.html.slim within layouts/application
+  Rendered tasks/_form.html.slim (Duration: 4.7ms | Allocations: 4348)
+  Rendered tasks/new.html.slim within layouts/application (Duration: 7.5ms | Allocations: 6731)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 15ms (Views: 13.7ms | ActiveRecord: 0.2ms | Allocations: 13761)
+Started POST "/tasks" for 127.0.0.1 at 2022-03-21 12:57:19 +0900
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"新規作成のテストを書く", "description"=>""}, "commit"=>"登録する"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 46 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('新規作成のテストを書く', '', '2022-03-21 03:57:19.466794', '2022-03-21 03:57:19.466794', 46)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://127.0.0.1:56463/
+Completed 302 Found in 3ms (ActiveRecord: 0.6ms | Allocations: 1097)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:57:19 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 46 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 46 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.2ms | Allocations: 593)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 6.9ms | ActiveRecord: 0.5ms | Allocations: 7704)
+  [1m[35m (1.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$mDOn3I4gNgzn9gMQEfDwT.7qrEJ0nBFvg.SuETdnCx/1nmK/CBCcm', '2022-03-21 03:57:19.656848', '2022-03-21 03:57:19.656848')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-21 03:57:19.660163', '2022-03-21 03:57:19.660163', 47)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-21 12:57:19 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.8ms | Allocations: 343)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.7ms | ActiveRecord: 0.0ms | Allocations: 6937)
+Started POST "/login" for 127.0.0.1 at 2022-03-21 12:57:19 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56463/
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms | Allocations: 468)
+Started GET "/" for 127.0.0.1 at 2022-03-21 12:57:19 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 47 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 47 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.1ms | Allocations: 443)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 6.6ms | ActiveRecord: 0.5ms | Allocations: 7539)
+Started GET "/tasks/new" for 127.0.0.1 at 2022-03-21 12:57:19 +0900
+Processing by TasksController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 47 LIMIT 1[0m
+  Rendering tasks/new.html.slim within layouts/application
+  Rendered tasks/_form.html.slim (Duration: 1.0ms | Allocations: 643)
+  Rendered tasks/new.html.slim within layouts/application (Duration: 1.2ms | Allocations: 737)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 6.9ms | ActiveRecord: 0.3ms | Allocations: 7632)
+Started POST "/tasks" for 127.0.0.1 at 2022-03-21 12:57:19 +0900
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"", "description"=>""}, "commit"=>"登録する"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 47 LIMIT 1[0m
+  Rendering tasks/new.html.slim within layouts/application
+  Rendered tasks/_form.html.slim (Duration: 1.3ms | Allocations: 777)
+  Rendered tasks/new.html.slim within layouts/application (Duration: 1.5ms | Allocations: 871)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 11ms (Views: 7.7ms | ActiveRecord: 0.3ms | Allocations: 8509)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (9.8ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (3.4ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$ZCrjxI02M6wU/0Z4.n7mAOMzyyJbBUGxTCRpMaESNfuuEZqxDETgq', '2022-03-22 06:28:59.452049', '2022-03-22 06:28:59.452049')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-22 06:28:59.484985', '2022-03-22 06:28:59.484985', 48)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-22 15:29:00 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 11.7ms | Allocations: 11751)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 1383ms (Views: 1376.5ms | ActiveRecord: 0.0ms | Allocations: 1806546)
+Started GET "/assets/application-78ac98b5c3f13c9a0d8e8b42b513e46b2956f540c719b3c27bac635def92bc57.css" for 127.0.0.1 at 2022-03-22 15:29:01 +0900
+Started POST "/login" for 127.0.0.1 at 2022-03-22 15:29:02 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56659/
+Completed 302 Found in 3ms (ActiveRecord: 0.5ms | Allocations: 660)
+Started GET "/" for 127.0.0.1 at 2022-03-22 15:29:02 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 48 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 48 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 16.2ms | Allocations: 7545)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 33ms (Views: 24.5ms | ActiveRecord: 0.8ms | Allocations: 16573)
+  [1m[35m (2.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (2.3ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$kw1VM6PjpvQkQEGbMlw/we5s58.ysBOlpcfiTYYJlEkqwr7CWr1te', '2022-03-22 06:29:02.727993', '2022-03-22 06:29:02.727993')[0m
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-22 06:29:02.732778', '2022-03-22 06:29:02.732778', 49)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-22 15:29:02 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.5ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 8.7ms | ActiveRecord: 0.0ms | Allocations: 6936)
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'b@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーB', 'b@example.com', '$2a$04$KwKWmua47gv4/NOt23e/ru35VSys8JONCkkWWfWsIFIY1/2mzG.6.', '2022-03-22 06:29:02.768808', '2022-03-22 06:29:02.768808')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started POST "/login" for 127.0.0.1 at 2022-03-22 15:29:02 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"b@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'b@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56659/
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms | Allocations: 479)
+Started GET "/" for 127.0.0.1 at 2022-03-22 15:29:02 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 50 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 50 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 0.9ms | Allocations: 299)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 6.8ms | ActiveRecord: 0.5ms | Allocations: 7411)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$ZNOHAyttMZ67Vn6PfgCc8e8e2yEtAAjUcDJTu5O6asDAemo5PbYJm', '2022-03-22 06:29:03.076591', '2022-03-22 06:29:03.076591')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-22 06:29:03.078308', '2022-03-22 06:29:03.078308', 51)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-22 15:29:03 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.5ms | Allocations: 334)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.5ms | ActiveRecord: 0.0ms | Allocations: 6923)
+Started POST "/login" for 127.0.0.1 at 2022-03-22 15:29:03 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56659/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 468)
+Started GET "/" for 127.0.0.1 at 2022-03-22 15:29:03 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 51 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 51 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.2ms | Allocations: 443)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 6.8ms | ActiveRecord: 0.5ms | Allocations: 7545)
+Started GET "/tasks/39" for 127.0.0.1 at 2022-03-22 15:29:03 +0900
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"39"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 51 LIMIT 1[0m
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 51 AND `tasks`.`id` = 39 LIMIT 1[0m
+  Rendering tasks/show.html.slim within layouts/application
+  Rendered tasks/show.html.slim within layouts/application (Duration: 12.8ms | Allocations: 7183)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 22ms (Views: 19.8ms | ActiveRecord: 0.5ms | Allocations: 14548)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$edHQ50thGxHQmJwydYn56utzHsKCUBKZ5b6olWHx/8jlIsuwL04dm', '2022-03-22 06:29:03.469434', '2022-03-22 06:29:03.469434')[0m
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-22 06:29:03.473562', '2022-03-22 06:29:03.473562', 52)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-22 15:29:03 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.6ms | Allocations: 343)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.2ms | ActiveRecord: 0.0ms | Allocations: 6937)
+Started POST "/login" for 127.0.0.1 at 2022-03-22 15:29:03 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56659/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 468)
+Started GET "/" for 127.0.0.1 at 2022-03-22 15:29:03 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 52 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 52 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.3ms | Allocations: 445)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 7.2ms | ActiveRecord: 0.5ms | Allocations: 7556)
+Started GET "/tasks/new" for 127.0.0.1 at 2022-03-22 15:29:03 +0900
+Processing by TasksController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 52 LIMIT 1[0m
+  Rendering tasks/new.html.slim within layouts/application
+  Rendered tasks/_form.html.slim (Duration: 11.3ms | Allocations: 4349)
+  Rendered tasks/new.html.slim within layouts/application (Duration: 15.5ms | Allocations: 6732)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 27ms (Views: 25.5ms | ActiveRecord: 0.3ms | Allocations: 13754)
+Started POST "/tasks" for 127.0.0.1 at 2022-03-22 15:29:03 +0900
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"新規作成のテストを書く", "description"=>""}, "commit"=>"登録する"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 52 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('新規作成のテストを書く', '', '2022-03-22 06:29:03.814001', '2022-03-22 06:29:03.814001', 52)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://127.0.0.1:56659/
+Completed 302 Found in 3ms (ActiveRecord: 0.6ms | Allocations: 1094)
+Started GET "/" for 127.0.0.1 at 2022-03-22 15:29:03 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 52 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 52 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.3ms | Allocations: 597)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 7.1ms | ActiveRecord: 0.5ms | Allocations: 7707)
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'a@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('ユーザーA', 'a@example.com', '$2a$04$OT3WuO5zFhgTH6JqQ/kSZO3Mcm6bAsnAHctUgeMLtn30pWwPKeHNe', '2022-03-22 06:29:03.980925', '2022-03-22 06:29:03.980925')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('最初のタスク', 'Rspec&Capybara&FactoryBotを準備する', '2022-03-22 06:29:03.982658', '2022-03-22 06:29:03.982658', 53)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/login" for 127.0.0.1 at 2022-03-22 15:29:03 +0900
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.slim within layouts/application
+  Rendered sessions/new.html.slim within layouts/application (Duration: 0.5ms | Allocations: 342)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.5ms | ActiveRecord: 0.0ms | Allocations: 6936)
+Started POST "/login" for 127.0.0.1 at 2022-03-22 15:29:04 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"session"=>{"email"=>"a@example.com", "password"=>"[FILTERED]"}, "commit"=>"ログインする"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'a@example.com' LIMIT 1[0m
+Redirected to http://127.0.0.1:56659/
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 468)
+Started GET "/" for 127.0.0.1 at 2022-03-22 15:29:04 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 53 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 53 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.5ms | Allocations: 443)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 7.1ms | ActiveRecord: 0.6ms | Allocations: 7545)
+Started GET "/tasks/new" for 127.0.0.1 at 2022-03-22 15:29:04 +0900
+Processing by TasksController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 53 LIMIT 1[0m
+  Rendering tasks/new.html.slim within layouts/application
+  Rendered tasks/_form.html.slim (Duration: 1.0ms | Allocations: 645)
+  Rendered tasks/new.html.slim within layouts/application (Duration: 1.2ms | Allocations: 739)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 7.0ms | ActiveRecord: 0.2ms | Allocations: 7640)
+Started POST "/tasks" for 127.0.0.1 at 2022-03-22 15:29:04 +0900
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"name"=>"", "description"=>""}, "commit"=>"登録する"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 53 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('', '', '2022-03-22 06:29:04.285875', '2022-03-22 06:29:04.285875', 53)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://127.0.0.1:56659/
+Completed 302 Found in 3ms (ActiveRecord: 0.6ms | Allocations: 1079)
+Started GET "/" for 127.0.0.1 at 2022-03-22 15:29:04 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 53 LIMIT 1[0m
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT `tasks`.* FROM `tasks` WHERE `tasks`.`user_id` = 53 ORDER BY `tasks`.`created_at` DESC[0m
+  Rendered tasks/index.html.slim within layouts/application (Duration: 1.3ms | Allocations: 587)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 7.5ms | ActiveRecord: 0.5ms | Allocations: 7687)
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'test1@example.com' LIMIT 1[0m
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('テストユーザー', 'test1@example.com', '$2a$04$9AwXuDn0r2WddEJmeUnGb.aqA2o/AjHx2EDDe/CzxWHxTkgEgOKlC', '2022-04-10 02:34:05.455883', '2022-04-10 02:34:05.455883')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('メイラーSpecを書く', '送信したメールの内容を確認します', '2022-04-10 02:34:05.463507', '2022-04-10 02:34:05.463507', 54)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering task_mailer/creation_email.html.slim within layouts/mailer
+  Rendered task_mailer/creation_email.html.slim within layouts/mailer (Duration: 10.2ms | Allocations: 10410)
+  Rendering task_mailer/creation_email.text.slim within layouts/mailer
+  Rendered task_mailer/creation_email.text.slim within layouts/mailer (Duration: 1.5ms | Allocations: 2334)
+TaskMailer#creation_email: processed outbound mail in 23.1ms
+  [1m[35m (4.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'test1@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('テストユーザー', 'test1@example.com', '$2a$04$fiBkH4uGkV4JAiVIpne2..gMgluK.a0anQ8v98bbSwf0YlarO3jLG', '2022-04-10 02:36:33.366221', '2022-04-10 02:36:33.366221')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.2ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('メイラーSpecを書く', '送信したメールの内容を確認します', '2022-04-10 02:36:33.370400', '2022-04-10 02:36:33.370400', 55)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering task_mailer/creation_email.html.slim within layouts/mailer
+  Rendered task_mailer/creation_email.html.slim within layouts/mailer (Duration: 16.4ms | Allocations: 10396)
+  Rendering task_mailer/creation_email.text.slim within layouts/mailer
+  Rendered task_mailer/creation_email.text.slim within layouts/mailer (Duration: 4.0ms | Allocations: 2334)
+TaskMailer#creation_email: processed outbound mail in 36.2ms
+  [1m[35m (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'test1@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('テストユーザー', 'test1@example.com', '$2a$04$8ywsV5AieQ0zf9GfnE9ufexy.MF/QL0jq2QUTHN01b2Q6TxMvXHwm', '2022-04-10 02:37:30.962222', '2022-04-10 02:37:30.962222')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.1ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('メイラーSpecを書く', '送信したメールの内容を確認します', '2022-04-10 02:37:30.966809', '2022-04-10 02:37:30.966809', 56)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering task_mailer/creation_email.html.slim within layouts/mailer
+  Rendered task_mailer/creation_email.html.slim within layouts/mailer (Duration: 14.6ms | Allocations: 10396)
+  Rendering task_mailer/creation_email.text.slim within layouts/mailer
+  Rendered task_mailer/creation_email.text.slim within layouts/mailer (Duration: 3.5ms | Allocations: 2334)
+TaskMailer#creation_email: processed outbound mail in 30.9ms
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (7.9ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1'[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (2.5ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = BINARY 'test1@example.com' LIMIT 1[0m
+  [1m[36mUser Create (5.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`) VALUES ('テストユーザー', 'test1@example.com', '$2a$04$pBrksfNOQMNkTF7NaepMsObtnAvU8NQaJeDALCTwxZcMG1AdqMR4O', '2022-04-11 04:53:29.973342', '2022-04-11 04:53:29.973342')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (4.0ms)[0m  [1m[32mINSERT INTO `tasks` (`name`, `description`, `created_at`, `updated_at`, `user_id`) VALUES ('メイラーSpecを書く', '送信したメールの内容を確認します', '2022-04-11 04:53:29.985508', '2022-04-11 04:53:29.985508', 57)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering task_mailer/creation_email.html.slim within layouts/mailer
+  Rendered task_mailer/creation_email.html.slim within layouts/mailer (Duration: 27.1ms | Allocations: 10408)
+  Rendering task_mailer/creation_email.text.slim within layouts/mailer
+  Rendered task_mailer/creation_email.text.slim within layouts/mailer (Duration: 6.1ms | Allocations: 2334)
+TaskMailer#creation_email: processed outbound mail in 61.2ms
+  [1m[35m (5.1ms)[0m  [1m[31mROLLBACK[0m
